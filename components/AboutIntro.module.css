@@ -1,0 +1,33 @@
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 72px;
+}
+
+.quoteDesc {
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.imageCollage {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  height: 420px;
+}
+
+.imageCollage img {
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

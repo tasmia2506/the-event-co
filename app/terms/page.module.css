@@ -1,0 +1,59 @@
+.legal {
+  max-width: 780px;
+}
+
+.legal h2 {
+  font-size: 1.4rem;
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+
+.legal h2:first-child {
+  margin-top: 0;
+}
+
+.legal p,
+.legal li {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.legal ul {
+  margin: 12px 0 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.updated {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+
+.title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+/* Each clause drifts in as it scrolls into view (browsers with scroll-driven animations) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .legal > * {
+      animation: clauseIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+@keyframes clauseIn {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

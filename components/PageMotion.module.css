@@ -1,0 +1,253 @@
+/* Shared motion primitives for the inner pages (see PageMotion.tsx). */
+
+/* ---------- SplitText ---------- */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* room for ascenders/descenders so the mask never clips glyphs */
+  padding: 0.1em 0 0.16em;
+  margin: -0.1em 0 -0.16em;
+}
+
+.nowrap {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.chip {
+  display: inline-block;
+  will-change: transform;
+  transform-origin: 0 100%;
+}
+
+/* ---------- ImageCurtain ---------- */
+.curtainBox {
+  position: relative;
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(180deg, #521522 0%, #2b0810 100%);
+  transform-origin: 50% 0;
+  pointer-events: none;
+}
+
+/* ---------- TiltCard ---------- */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- Route transition ---------- */
+.pageEnter {
+  animation: pageIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+}
+
+.wipe,
+.wipeBack {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  animation: wipeUp 0.95s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.wipe {
+  background: #43101b;
+  animation-delay: 0.14s;
+}
+
+.wipeBack {
+  background: #521522;
+  border-bottom: none;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes wipeUp {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+/* ---------- WordScroll (pinned, word-by-word highlight) ---------- */
+.wordScroll {
+  max-width: 980px;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.05rem + 2.3vw, 3.1rem);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+.wordScroll .w {
+  display: inline-block;
+  white-space: pre;
+}
+
+.wordScrollWrap {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.wordProgress {
+  display: block;
+  height: 0;
+  margin: 36px auto 0;
+  max-width: 260px;
+  background: rgba(82, 21, 34, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.wordProgress i {
+  position: absolute;
+  inset: 0;
+  background: #c9566b;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordProgress i {
+    transform: scaleX(1);
+  }
+}
+
+/* Dim words only when motion is allowed; otherwise the text just reads normally */
+@media (prefers-reduced-motion: no-preference) {
+  .wordScroll[data-armed='true'] .w {
+    opacity: 0.16;
+  }
+}
+
+/* ---------- Form reveal: rows rise one after another ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .formReveal :global(h3),
+  .formReveal :global(form) > *,
+  .formReveal :global(.form-success-banner) {
+    opacity: 0;
+  }
+
+  .formReveal[data-in='true'] :global(h3),
+  .formReveal[data-in='true'] :global(form) > *,
+  .formReveal[data-in='true'] :global(.form-success-banner) {
+    animation: rowIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .formReveal[data-in='true'] :global(h3) {
+    animation-delay: 0.05s;
+  }
+  .formReveal[data-in='true'] :global(form) > :nth-child(1) { animation-delay: 0.15s; }
+  .formReveal[data-in='true'] :global(form) > :nth-child(2) { animation-delay: 0.23s; }
+  .formReveal[data-in='true'] :global(form) > :nth-child(3) { animation-delay: 0.31s; }
+  .formReveal[data-in='true'] :global(form) > :nth-child(4) { animation-delay: 0.39s; }
+  .formReveal[data-in='true'] :global(form) > :nth-child(5) { animation-delay: 0.47s; }
+  .formReveal[data-in='true'] :global(form) > :nth-child(6) { animation-delay: 0.55s; }
+  .formReveal[data-in='true'] :global(form) > :nth-child(n + 7) { animation-delay: 0.63s; }
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Ambient glow orbs for dark bands ---------- */
+.orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 86, 107, 0.28) 0%, rgba(201, 86, 107, 0) 65%);
+  /* no blur filter: radial gradient is already soft and blur is costly to repaint */
+  will-change: transform;
+}
+
+.orb:nth-child(1) {
+  left: -14vmax;
+  top: -20vmax;
+  animation: drift 16s ease-in-out infinite alternate;
+}
+
+.orb:nth-child(2) {
+  right: -16vmax;
+  bottom: -24vmax;
+  background: radial-gradient(circle, rgba(109, 28, 46, 0.55) 0%, rgba(109, 28, 46, 0) 65%);
+  animation: drift 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(8vmax, 5vmax, 0) scale(1.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb {
+    animation: none;
+  }
+  .wipe,
+  .wipeBack {
+    display: none;
+  }
+  .pageEnter {
+    animation-duration: 0.01s;
+    animation-delay: 0s;
+  }
+  .curtain {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .orb {
+    animation-duration: 40s;
+  }
+}
+
+/* Curtains removed: images must always be visible even if the reveal never fires */
+.curtain {
+  display: none !important;
+}

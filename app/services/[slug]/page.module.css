@@ -1,0 +1,51 @@
+.backLink {
+  margin-bottom: 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.image {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  height: 420px;
+}
+
+.image img {
+  object-fit: cover;
+}
+
+.features {
+  list-style: none;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.features li {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  padding-left: 18px;
+  position: relative;
+}
+
+.features li::before {
+  content: '\2726';
+  position: absolute;
+  left: 0;
+  color: var(--accent-burgundy);
+  font-size: 0.7rem;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

@@ -1,0 +1,232 @@
+.hero {
+  background:
+    linear-gradient(rgba(67, 16, 27, 0.86), rgba(82, 21, 34, 0.92)),
+    url('/hero-bg.jpg') center / cover no-repeat;
+  padding: 120px 0 72px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.hero > :global(.container) {
+  width: 100%;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video {
+  object-fit: cover;
+}
+
+/* Neutral dark fade, strongest behind the text on the left */
+.videoShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.12) 100%),
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0) 30%);
+}
+
+
+.hero > :global(.container) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    display: none;
+  }
+}
+
+.hero :global(.eyebrow),
+.hero .title,
+.hero .title span {
+  color: var(--text-white);
+}
+
+.hero .description {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.55;
+  max-width: 620px;
+}
+
+/* No overlay on the video, so a soft shadow keeps the white text legible */
+.hero :global(.eyebrow),
+.hero .title,
+.hero .description {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 24px rgba(0, 0, 0, 0.55);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 860px);
+  align-items: center;
+}
+
+.title {
+  font-weight: 600;
+  font-size: clamp(2.6rem, 1.6rem + 3.4vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+}
+
+.title span {
+  color: var(--accent-burgundy);
+}
+
+.description {
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: 32px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 36px;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-burgundy);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .stats {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .title {
+    font-size: clamp(2.8rem, 13vw, 4.5rem);
+    line-height: 1.05;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+/* Portrait phones: lift text legibility with a vertical shade, tune sizes */
+@media (max-width: 640px) {
+  .hero {
+    padding: 96px 0 56px;
+  }
+
+  .videoShade {
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7));
+  }
+
+  .hero .description {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .title {
+    font-size: clamp(2.1rem, 11vw, 3.4rem);
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Pause / play for the background video (WCAG 2.2.2) */
+.videoToggle {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.videoToggle:hover,
+.videoToggle:focus-visible {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 640px) {
+  .videoToggle {
+    right: 16px;
+    bottom: 84px;
+  }
+}

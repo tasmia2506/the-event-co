@@ -1,0 +1,137 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+}
+
+.tile {
+  padding-top: 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 14px;
+  color: var(--accent-burgundy);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-burgundy);
+}
+
+/* --- Dark variant: boxed glass cards on the gradient band --- */
+.dark.grid {
+  gap: 24px;
+}
+
+.dark .tile {
+  padding: 32px 28px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.dark .tile:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.dark .icon {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 20px;
+  color: var(--text-white);
+}
+
+.dark .title {
+  color: var(--text-white);
+}
+
+.dark .desc {
+  color: var(--text-on-dark-muted);
+}
+
+.dark .link {
+  color: var(--text-white);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Bold motion pass ---- */
+.icon {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 18px;
+}
+
+.dark .icon {
+  color: #fff;
+}
+
+.tile {
+  position: relative;
+}
+
+.dark .tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 0%, rgba(201, 86, 107, 0.35), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dark .tile {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-normal),
+      border-color var(--transition-normal), box-shadow 0.5s ease;
+  }
+
+  .dark .tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 44px -16px rgba(201, 86, 107, 0.45);
+  }
+
+  .dark .tile:hover::before {
+    opacity: 1;
+  }
+}

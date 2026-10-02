@@ -1,0 +1,20 @@
+{
+  "name": "the-event-co",
+  "version": "2.0.0",
+  "description": "THE EVENT CO. (Event Works) — Wedding Planning, Corporate Events & Event Production, Bengaluru",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "event-management",
+    "wedding-planning",
+    "corporate-events",
+    "event-production",
+    "equipment-rental",
+    "bengaluru"
+  ],
+  "author": "THE EVENT CO.",
+  "license": "ISC"
+}

@@ -1,0 +1,47 @@
+.band {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800;
+  color: var(--accent-burgundy);
+  line-height: 1;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+@media (max-width: 560px) {
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .band {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.line {
+  width: 56px;
+  height: 0;
+  margin: 16px auto 0;
+  background: #c9566b;
+}

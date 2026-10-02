@@ -1,0 +1,136 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  transition:
+    box-shadow var(--transition-slow),
+    border-color var(--transition-normal);
+}
+
+/* rose bar grows down the left edge of the open item */
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #c9566b;
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item.open {
+  border-color: var(--border-burgundy);
+  box-shadow: 0 18px 40px rgba(67, 16, 27, 0.14);
+}
+
+.item.open::before {
+  transform: scaleY(1);
+}
+
+.index {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  transition: color var(--transition-normal);
+}
+
+.item.open .index,
+.question:hover .index {
+  color: var(--accent-burgundy);
+}
+
+.qText {
+  flex: 1;
+}
+
+.question:hover .qText {
+  color: var(--accent-burgundy);
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--accent-burgundy);
+  display: inline-block;
+  line-height: 1;
+}
+
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item.open .answerWrap {
+  grid-template-rows: 1fr;
+}
+
+.answerInner {
+  overflow: hidden;
+}
+
+.answer {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding: 0 24px 22px 62px;
+  opacity: 0;
+  translate: 0 -10px;
+  transition:
+    opacity 0.45s ease,
+    translate 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item.open .answer {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0.12s;
+}
+
+@media (max-width: 560px) {
+  .answer {
+    padding-left: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item::before,
+  .answerWrap,
+  .answer {
+    transition-duration: 0.01s;
+    transition-delay: 0s;
+  }
+}

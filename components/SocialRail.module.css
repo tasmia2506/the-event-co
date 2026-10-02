@@ -1,0 +1,78 @@
+.rail {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-white);
+  background: var(--accent-burgundy);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: var(--shadow-card);
+  transition: background-color var(--transition-fast), width var(--transition-normal);
+}
+
+.item:hover,
+.item:focus-visible {
+  background: var(--accent-burgundy-hover);
+}
+
+/* Label slides out on hover */
+.tip {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px 0 14px;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-white);
+  background: var(--accent-burgundy-hover);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.item:hover .tip,
+.item:focus-visible .tip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 640px) {
+  /* Bottom-left, horizontal: keeps clear of content and of the WhatsApp button */
+  .rail {
+    top: auto;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    left: max(12px, env(safe-area-inset-left));
+    transform: none;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .item {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+  }
+
+  .tip {
+    display: none;
+  }
+}

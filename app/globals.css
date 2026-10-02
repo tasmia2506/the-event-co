@@ -1,0 +1,629 @@
+/* ==========================================================================
+   THE EVENT CO. — Global design tokens, resets & shared primitives.
+   Component-specific layout lives in co-located CSS Modules.
+   ========================================================================== */
+
+:root {
+  /* ===== Three-colour system: Ivory / Black / Burgundy =====
+     Every value below is a tint, shade, or opacity of one of these three
+     hues — no other colour is used anywhere on the site (the one
+     unavoidable exception is WhatsApp's own green mark on the chat icon). */
+
+  /* White / neutral */
+  --bg-base: #ffffff;
+  --bg-surface: #f7f7f7;
+  --bg-card: #ffffff;
+  --bg-card-tint: #f7f7f7;
+
+  /* Black */
+  --bg-dark: #43101b;
+
+  /* Burgundy */
+  --bg-burgundy-banner: #43101b;
+
+  /* Text — black family on light, ivory family on dark */
+  --text-primary: #1a1a1a;
+  --text-secondary: rgba(18, 18, 18, 0.72);
+  --text-muted: rgba(18, 18, 18, 0.66);
+  --text-light: #ffffff;
+  --text-white: #ffffff;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.62);
+  --text-on-dark-faint: rgba(255, 255, 255, 0.62);
+
+  --accent-burgundy: #521522;
+  --accent-burgundy-hover: #3e0e18;
+  --accent-burgundy-soft: #7a2838;
+  --accent-burgundy-light: transparent;
+
+  --border-subtle: rgba(18, 18, 18, 0.1);
+  --border-light: rgba(18, 18, 18, 0.06);
+  --border-medium: rgba(18, 18, 18, 0.16);
+  --border-burgundy: rgba(82, 21, 34, 0.35);
+  --border-on-dark: rgba(255, 255, 255, 0.08);
+
+  --shadow-sm: 0 2px 8px rgba(18, 18, 18, 0.03);
+  --shadow-card: 0 4px 20px rgba(18, 18, 18, 0.05);
+  --shadow-hover: 0 12px 32px rgba(18, 18, 18, 0.08);
+
+  --font-display: var(--font-oswald), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: var(--font-quattrocento), Georgia, 'Times New Roman', serif;
+
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --transition-fast: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* --- Layout Primitives --- */
+.container {
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+/* Page-level H1 (About, Services, FAQ, etc.) — the Hero's own H1 is sized
+   separately in Hero.module.css since it needs the larger editorial scale. */
+h1 {
+  font-weight: 600;
+  font-size: clamp(2.6rem, 1.6rem + 3.4vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.section {
+  padding: 92px 0;
+}
+
+.section-surface {
+  background: var(--bg-surface);
+}
+
+.section-white {
+  background: var(--bg-card);
+}
+
+.section-header {
+  max-width: 720px;
+  margin-bottom: 56px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Section headings sit on the left edge of the container, not centred */
+.section-header.text-center {
+  text-align: left;
+  max-width: 860px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.section-header.section-header-centered {
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Eyebrow: Oswald, small, wide-tracked caps */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-burgundy);
+  /* Quattrocento tops out at 700, so thicken the strokes slightly */
+  -webkit-text-stroke: 0.5px currentColor;
+  margin-bottom: 14px;
+}
+
+
+.section-lead {
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-top: 16px;
+}
+
+/* Accent words stay in the heading face (Oswald); only the colour changes */
+.heading-serif,
+.heading-burgundy {
+  color: var(--heading-accent, var(--accent-burgundy));
+}
+
+/* --- Buttons --- */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-normal), color var(--transition-normal),
+    border-color var(--transition-normal);
+  white-space: nowrap;
+  font-family: var(--font-display);
+}
+
+.btn-pill:focus-visible {
+  outline: 2px solid var(--accent-burgundy);
+  outline-offset: 3px;
+}
+
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 0.6875rem;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 0.8125rem;
+}
+
+.btn-burgundy {
+  background: var(--accent-burgundy);
+  color: var(--text-white);
+}
+
+.btn-burgundy:hover {
+  background: var(--accent-burgundy-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-burgundy);
+  color: var(--accent-burgundy);
+}
+
+.btn-outline-burgundy {
+  background: transparent;
+  border-color: var(--accent-burgundy);
+  color: var(--accent-burgundy);
+}
+
+.btn-outline-burgundy:hover {
+  background: var(--accent-burgundy);
+  color: var(--text-white);
+}
+
+.btn-outline-white {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--text-white);
+}
+
+.btn-outline-white:hover {
+  background: var(--bg-card);
+  color: var(--accent-burgundy);
+}
+
+.btn-light {
+  background: #ffffff;
+  color: var(--accent-burgundy);
+}
+
+.btn-light:hover {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+/* --- Skip Link --- */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 12px;
+  z-index: 2000;
+  background: var(--accent-burgundy);
+  color: var(--text-white);
+  padding: 10px 18px;
+  border-radius: var(--radius-xs);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* --- Form Primitives (shared by enquiry & rental forms) --- */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.form-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-base);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-burgundy);
+  box-shadow: 0 0 0 3px var(--accent-burgundy-light);
+}
+
+.form-success-banner {
+  background: var(--accent-burgundy-light);
+  border: 1px solid var(--border-burgundy);
+  color: var(--accent-burgundy);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 868px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* Testimonials: photo background under a burgundy overlay */
+.testimonials-band {
+  background:
+    linear-gradient(rgba(67, 16, 27, 0.88), rgba(82, 21, 34, 0.92)),
+    url('/testimonials-bg.jpg') center / cover no-repeat;
+}
+
+.testimonials-band .eyebrow,
+.testimonials-band h2 {
+  color: var(--text-white);
+}
+
+.testimonials-band {
+  --heading-accent: var(--text-white);
+}
+
+/* --- Motion ---------------------------------------------------------- */
+.btn-pill {
+  transition: background-color var(--transition-normal), color var(--transition-normal),
+    border-color var(--transition-normal), transform var(--transition-fast);
+}
+
+.btn-pill:hover {
+  transform: translateY(-2px);
+}
+
+.btn-pill:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Photo bands drift slower than the page (desktop only; iOS ignores fixed) */
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .testimonials-band {
+    background-attachment: scroll;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn-pill:hover {
+    transform: none;
+  }
+}
+
+/* ===== Motion & graphics layer ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 200;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #43101b, #6d1c2e 70%, #c9566b);
+  pointer-events: none;
+}
+
+.marquee {
+  overflow: hidden;
+  padding: 22px 0;
+  background: linear-gradient(100deg, #2b0810, #43101b 50%, #6d1c2e);
+  color: #fff;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+
+.marquee-row {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+.marquee-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c9566b;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Drifting glow on dark burgundy bands (transform-only, no blur) */
+[class*='DarkBand_dark'] {
+  position: relative;
+  overflow: hidden;
+}
+
+[class*='DarkBand_dark']::before {
+  content: '';
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  top: -35vmax;
+  right: -25vmax;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(201, 86, 107, 0.22), transparent);
+  pointer-events: none;
+  animation: glow-drift 18s ease-in-out infinite alternate;
+}
+
+[class*='DarkBand_dark'] > * {
+  position: relative;
+}
+
+@keyframes glow-drift {
+  to {
+    transform: translate3d(-12vmax, 10vmax, 0);
+  }
+}
+
+.btn-burgundy:active,
+.btn-pill:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  [class*='DarkBand_dark']::before {
+    animation: none;
+  }
+  .marquee-row[aria-hidden] {
+    display: none;
+  }
+}
+
+/* --- Mobile: 16px inputs (no iOS zoom) and 44px touch targets --- */
+@media (max-width: 768px) {
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 16px;
+    min-height: 46px;
+  }
+
+  .btn-pill {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+}
+
+/* --- Lenis smooth scroll: required rules so native smooth-scroll does not fight it --- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Embedded maps must stay usable while smooth scrolling is on */
+.lenis.lenis-smooth iframe:hover {
+  pointer-events: auto;
+}
+
+/* Touch feedback so taps feel responsive on phones */
+@media (hover: none) {
+  .btn-pill:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ---- Home page bold motion pass ---- */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg) translateX(0);
+  animation: btn-shine-sweep 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes btn-shine-sweep {
+  0%, 55% { transform: skewX(-20deg) translateX(0); }
+  100% { transform: skewX(-20deg) translateX(520%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine::after { animation: none; display: none; }
+}

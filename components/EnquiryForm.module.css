@@ -1,0 +1,106 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.cardSub {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 0.9375rem;
+}
+
+.submitBtn {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* light sweep across the button: idles every few seconds, runs on hover */
+.submitBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.38) 50%, transparent 100%);
+  transform: translateX(-130%) skewX(-18deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .submitBtn::after {
+    animation: shine 5s ease-in-out 1.6s infinite;
+  }
+
+  .submitBtn:hover::after {
+    animation: shine 0.9s ease-in-out;
+  }
+}
+
+@keyframes shine {
+  0%,
+  70% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(330%) skewX(-18deg);
+  }
+}
+
+/* Focus glow: field lifts, label turns burgundy, rose halo around the input */
+.card :global(.form-field) {
+  transition: translate var(--transition-normal);
+}
+
+.card :global(.form-field label) {
+  transition: color var(--transition-fast);
+}
+
+.card :global(.form-field:focus-within) {
+  translate: 0 -2px;
+}
+
+.card :global(.form-field:focus-within label) {
+  color: var(--accent-burgundy);
+}
+
+.card :global(.form-field input:focus),
+.card :global(.form-field select:focus),
+.card :global(.form-field textarea:focus) {
+  box-shadow:
+    0 0 0 3px rgba(201, 86, 107, 0.28),
+    0 10px 26px rgba(201, 86, 107, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card :global(.form-field:focus-within) {
+    translate: none;
+  }
+}
+
+@media (max-width: 868px) {
+  .card {
+    padding: 32px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 26px 16px;
+  }
+
+  .cardTitle {
+    font-size: 1.35rem;
+  }
+}

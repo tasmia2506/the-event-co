@@ -1,0 +1,85 @@
+/* Photo band: floral aisle under a burgundy wash */
+.band {
+  position: relative;
+  overflow: hidden;
+  background: #43101b;
+  color: var(--text-white);
+  padding: 96px 0;
+  text-align: center;
+}
+
+.band h2 {
+  color: var(--text-white);
+  margin-bottom: 16px;
+}
+
+.band p {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .band {
+    padding: 64px 0;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(67, 16, 27, 0.86), rgba(67, 16, 27, 0.9)),
+    url('/cta-bg.jpg') center / cover no-repeat;
+  transform-origin: 50% 50%;
+  animation: ctaZoom 24s ease-in-out infinite alternate;
+}
+
+.glow {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  left: 50%;
+  top: 50%;
+  margin: -30vmax 0 0 -30vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 86, 107, 0.22), transparent 60%);
+  pointer-events: none;
+  animation: ctaPulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes ctaZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.14); }
+}
+
+@keyframes ctaPulse {
+  from { transform: scale(0.8); opacity: 0.6; }
+  to { transform: scale(1.1); opacity: 1; }
+}
+
+.band h2 {
+  font-size: clamp(2.6rem, 1.4rem + 5vw, 5.5rem);
+  line-height: 1.02;
+}
+
+@media (max-width: 768px) {
+  .bg, .glow { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg, .glow { animation: none; }
+}

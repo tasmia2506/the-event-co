@@ -1,0 +1,22 @@
+/* Reusable "dark section" wrapper — swaps the black-on-ivory text system
+   for ivory-on-burgundy within whatever section uses it. */
+.dark {
+  background: linear-gradient(135deg, #2b0810 0%, #43101b 45%, #6d1c2e 100%);
+}
+
+.dark {
+  --heading-accent: var(--text-white);
+}
+
+.dark :global(.eyebrow) {
+  color: var(--text-white);
+}
+
+.dark h2,
+.dark h3 {
+  color: var(--text-white);
+}
+
+.dark :global(.section-lead) {
+  color: var(--text-on-dark-muted);
+}

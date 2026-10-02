@@ -1,0 +1,203 @@
+/* Horizontal slider: three cards per view on desktop, snapping card by card */
+.track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--text-white);
+  outline-offset: 4px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.arrows {
+  display: flex;
+  gap: 12px;
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Larger invisible touch target around each dot */
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: -17px -4px;
+}
+
+.dot:hover {
+  transform: scale(1.2);
+}
+
+.dotActive {
+  background: var(--text-white);
+}
+
+.arrow {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--text-white);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--text-white);
+  color: var(--accent-burgundy);
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Ivory cards with a burgundy edge — a quiet pull-quote, not a boxed widget */
+.card {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent-burgundy);
+  border-radius: var(--radius-sm);
+  flex: 0 0 calc((100% - 48px) / 3);
+  scroll-snap-align: start;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.notice {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 24px;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .track {
+    gap: 16px;
+  }
+
+  .card {
+    flex-basis: 100%;
+    padding: 28px 22px;
+  }
+
+  .quote {
+    font-size: 1.05rem;
+  }
+
+  .arrow {
+    width: 48px;
+    height: 48px;
+  }
+
+  .dots {
+    gap: 8px;
+  }
+}
+
+/* Cards sit on the burgundy photo band */
+.notice {
+  color: var(--text-on-dark-muted);
+}
+
+.card {
+  transition: box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.mark {
+  width: 40px;
+  height: 30px;
+  color: #c9566b;
+  margin-bottom: 18px;
+  transform-origin: 20% 80%;
+}

@@ -1,0 +1,179 @@
+/* About page: dark hero with an overlapping portrait, centred statement,
+   pull-quote row, then a dark principles band. */
+.hero {
+  background:
+    linear-gradient(rgba(43, 8, 16, 0.55), rgba(43, 8, 16, 0.7)),
+    url('/about-bg.jpg') center / cover no-repeat;
+  color: var(--text-white);
+  text-align: center;
+  padding: 88px 0 0;
+}
+
+.heroTitle {
+  color: var(--text-white);
+  font-size: clamp(3.5rem, 2rem + 7vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.heroSub {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 48px;
+}
+
+/* Sits half on the dark band, half on the light section below */
+.portrait {
+  position: relative;
+  width: min(300px, 70vw);
+  aspect-ratio: 3 / 4;
+  margin: 0 auto;
+  margin-bottom: -140px;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.portrait img {
+  object-fit: cover;
+}
+
+.story {
+  background: var(--bg-surface);
+  padding: 230px 0 100px;
+  text-align: center;
+}
+
+.kicker {
+  font-size: 0.9375rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.statement {
+  max-width: 900px;
+  margin: 0 auto 56px;
+}
+
+.accent {
+  color: var(--accent-burgundy);
+}
+
+/* Holds the word-by-word scroll statement; room to breathe while it pins */
+.pinned {
+  margin: 0 auto 56px;
+  padding: 24px 0;
+}
+
+.columns {
+  max-width: 880px;
+  margin: 0 auto;
+  column-count: 1;
+  text-align: center;
+}
+
+.columns p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+.quoteRow {
+  max-width: 980px;
+  margin: 96px auto 0;
+  display: grid;
+  grid-template-columns: 0.55fr 1fr;
+  gap: 56px;
+  align-items: center;
+  text-align: left;
+}
+
+.quoteImg {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.quoteImg img {
+  object-fit: cover;
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+}
+
+.principles {
+  background: linear-gradient(135deg, #2b0810 0%, #43101b 55%, #5a1626 100%);
+  color: var(--text-white);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.principlesInner {
+  position: relative;
+  z-index: 1;
+}
+
+.principlesGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.principlesGrid h2 {
+  color: var(--text-white);
+  margin-bottom: 18px;
+}
+
+.principlesGrid p {
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 28px;
+}
+
+.after {
+  background: var(--bg-base);
+  padding: 90px 0;
+}
+
+@media (max-width: 1024px) {
+  .principlesGrid,
+  .quoteRow {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .quoteImg {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .columns {
+    column-count: 1;
+  }
+
+  .story {
+    padding-top: 200px;
+  }
+}
+
+.heroTitle,
+.heroSub {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+}

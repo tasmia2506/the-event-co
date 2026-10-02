@@ -1,0 +1,53 @@
+.floatBtn {
+  position: fixed;
+  right: 28px;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1e9e52;
+  color: var(--text-white);
+  padding: 13px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-hover);
+  transition: transform var(--transition-fast);
+}
+
+.floatBtn:hover {
+  transform: translateY(-2px);
+}
+
+.floatBtn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-white);
+}
+
+@media (max-width: 640px) {
+  .floatBtn {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: max(12px, env(safe-area-inset-right));
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .floatBtn svg {
+    width: 26px;
+    height: 26px;
+  }
+}
