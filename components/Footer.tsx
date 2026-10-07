@@ -52,12 +52,6 @@ export default function Footer() {
                 <strong>Legal Entity:</strong> {SITE.legalName}
               </div>
               <div>
-                <strong>Executive Partner:</strong> Nooman Zaid Khan
-              </div>
-              <div>
-                <strong>Managing Partner:</strong> Mohammad Danish Shariff
-              </div>
-              <div>
                 <strong>Studio:</strong> St. Patrick&rsquo;s Complex, Brigade Road, Bengaluru &ndash; 560 025
               </div>
               <div>

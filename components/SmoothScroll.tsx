@@ -13,15 +13,15 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const lenis = new Lenis({
-      // Light smoothing: lerp keeps the page tracking the wheel closely (less "floaty" lag)
-      lerp: 0.1,
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       wheelMultiplier: 1,
       smoothWheel: true,
-      // Phones keep native momentum scrolling, which is smoother than JS-driven touch
-      // In-page links like #rentalForm scroll smoothly too
+      syncTouch: true,
       anchors: { offset: -90 },
     });
 
+    // Keep GSAP ScrollTrigger (used by the word-scrub reveal) in sync with Lenis's own scroll position
     lenis.on('scroll', ScrollTrigger.update);
 
     const raf = (time: number) => {

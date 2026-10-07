@@ -1,0 +1,77 @@
+.banner {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1500;
+  margin: 0 auto;
+  max-width: 640px;
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.text {
+  flex: 1 1 320px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.accept,
+.reject {
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.accept {
+  background: var(--accent-burgundy);
+  color: #fff;
+  border: 1px solid var(--accent-burgundy);
+}
+
+.accept:hover {
+  background: var(--accent-burgundy-hover);
+}
+
+.reject {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.reject:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 640px) {
+  .banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}

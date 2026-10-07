@@ -153,7 +153,10 @@
 }
 
 .panelTitle {
-  color: var(--text-white);
+  background: linear-gradient(100deg, #ff4d5e 0%, var(--text-white) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-size: clamp(2rem, 1.4rem + 1.6vw, 3rem);
   line-height: 1.08;
   margin-bottom: 18px;

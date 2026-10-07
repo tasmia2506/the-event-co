@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { useReducedMotion } from 'motion/react';
 import styles from './Testimonials.module.css';
 
 // Placeholder structure only — replace with real, verified client quotes before launch.
@@ -97,17 +97,7 @@ export default function Testimonials() {
         onKeyDown={onKeyDown}
       >
         {REVIEWS.map((t, i) => (
-          <motion.div
-            className={styles.card}
-            key={i}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${REVIEWS.length}`}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '0px 0px -8% 0px' }}
-            transition={{ duration: 0.55, delay: Math.min(i, 2) * 0.06, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className={styles.card} key={i} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${REVIEWS.length}`}>
             <p className={styles.quote}>{t.quote}</p>
             <div className={styles.author}>
               <div>
@@ -115,7 +105,7 @@ export default function Testimonials() {
                 <div className={styles.role}>{t.role}</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 

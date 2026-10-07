@@ -1,0 +1,31 @@
+.hero {
+  background:
+    linear-gradient(rgba(43, 8, 16, 0.55), rgba(43, 8, 16, 0.7)),
+    url('/about card.jpeg') center / cover no-repeat;
+  color: var(--text-white);
+  text-align: center;
+  padding: 96px 0 72px;
+}
+
+.eyebrow {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.title {
+  background: linear-gradient(100deg, #ff4d5e 0%, var(--text-white) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lead {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 640px;
+  margin: 16px auto 0;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 72px 0 48px;
+  }
+}

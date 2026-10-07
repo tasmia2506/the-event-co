@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 2678400, // optimised images cached 31 days
-    qualities: [75],
+    qualities: [90],
   },
   async headers() {
     const security = [

@@ -14,7 +14,15 @@
 
 .dark h2,
 .dark h3 {
-  color: var(--text-white);
+  background: linear-gradient(100deg, #ff4d5e 0%, var(--text-white) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark h2 :global(.heading-serif),
+.dark h2 :global(.heading-burgundy) {
+  color: inherit;
 }
 
 .dark :global(.section-lead) {

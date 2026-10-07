@@ -17,7 +17,7 @@ export const SERVICES: Service[] = [
     slug: 'wedding-planning',
     badge: 'Bespoke Weddings',
     title: 'Wedding Planning',
-    img: '/cat-celebrations.jpg',
+    img: '/wedding.jpeg',
     punchline: 'Wedding planning that brings every detail together.',
     cardDesc: 'Create a wedding celebration that feels as special as the occasion itself.',
     longDesc: [
@@ -45,7 +45,7 @@ export const SERVICES: Service[] = [
     slug: 'event-planning',
     badge: 'Private Celebrations',
     title: 'Event Planning',
-    img: '/cat-weddings.jpg',
+    img: '/private celebration.jpeg',
     punchline: 'Planning designed around your celebration.',
     cardDesc: 'From intimate gatherings to vibrant celebrations, we plan events that reflect the mood, occasion and personality of your event.',
     longDesc: [
@@ -99,7 +99,7 @@ export const SERVICES: Service[] = [
     slug: 'corporate-event-planning',
     badge: 'Corporate',
     title: 'Corporate Event Planning',
-    img: '/cat-corporate.jpg',
+    img: '/corporate events.jpeg',
     punchline: 'Built for purposeful experiences.',
     cardDesc: 'From conferences and launches to annual celebrations and brand events, we plan professional experiences that connect people and support your objectives.',
     longDesc: [

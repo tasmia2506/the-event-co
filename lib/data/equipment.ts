@@ -10,14 +10,14 @@ export const EQUIPMENT: Equipment[] = [
   {
     badge: 'AUDIO RENTAL',
     title: 'Line Array Sound Systems',
-    img: '/PHOTO-2026-05-17-11-37-20.jpg',
+    img: '/PHOTO-2026-05-17-11-37-19.jpg',
     desc: 'Touring-grade concert audio. Flown or ground-stacked line arrays with matching subwoofers and digital amplification, tuned on-site by our own engineers.',
     features: ['Flown & Ground-Stacked Arrays', 'Digital Amplification & Processing', 'On-Site Engineer Included'],
   },
   {
     badge: 'MIXING CONSOLE',
     title: 'Digital Mixing Consoles',
-    img: '/PHOTO-2026-08-08-19-58-40.jpg',
+    img: '/PHOTO-2026-08-16-13-52-56.jpg',
     desc: 'Networked digital audio consoles with remote stage boxes, multi-track recording capability, and premium DSP processing for live sound and broadcast.',
     features: ['64+ Channel Capacity', 'Networked Digital Audio', 'Remote Stage Boxes'],
   },
@@ -45,7 +45,7 @@ export const EQUIPMENT: Equipment[] = [
   {
     badge: 'MICROPHONES',
     title: 'Wireless Mics & In-Ear Monitors',
-    img: '/PHOTO-2026-05-17-11-37-22.jpg',
+    img: '/PHOTO-2026-08-16-13-53-01.jpg',
     desc: 'Reliable RF wireless microphone kits with directional antenna paddles, frequency coordination, and clear stereo in-ear monitor systems.',
     features: ['RF Wireless Mic Kits', 'Frequency Coordination', 'Stereo IEM Systems'],
   },

@@ -21,7 +21,9 @@ export default function AboutPage() {
       <section className={styles.hero}>
         <div className="container">
           <Float to={50} distance={700}>
-            <SplitText as="h1" by="char" trigger="mount" className={styles.heroTitle} text="About Us" />
+            <h1 className={styles.heroTitle} aria-label="About Us">
+              About Us
+            </h1>
             <MotionIn as="p" y={20} trigger="mount" delay={0.7} className={styles.heroSub}>
               Event planners in Bengaluru
             </MotionIn>
@@ -45,20 +47,17 @@ export default function AboutPage() {
             accentClassName={styles.accent}
           />
 
-          <div className={styles.pinned}>
+          <div className={styles.twoCol}>
             <WordScroll
               text={`${SITE.name} is a Bengaluru-based event management and planning company specialising in weddings, celebrations, corporate events, festivals and large-scale event production.`}
             />
-          </div>
-
-          <Reveal delay={0.1}>
-            <div className={styles.columns}>
-              <p>
+            <Reveal delay={0.1}>
+              <p className={styles.sideText}>
                 We combine event planning, creative direction, d&eacute;cor coordination, event production and
                 on-ground execution to create experiences that are visually distinctive and professionally managed.
               </p>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
 
           <Reveal delay={0.1}>
             <div className={styles.quoteRow}>

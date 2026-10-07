@@ -25,19 +25,19 @@ const CATEGORIES = [
   {
     title: 'Weddings',
     desc: 'Wedding planning, ceremony coordination, reception planning and complete wedding execution.',
-    img: '/cat-celebrations.jpg',
+    img: '/wedding.jpeg',
     href: '/services/wedding-planning',
   },
   {
     title: 'Private Celebrations',
     desc: 'Birthdays, engagements, anniversaries, Haldi, Mehendi and private celebrations.',
-    img: '/cat-weddings.jpg',
+    img: '/private celebration.jpeg',
     href: '/services/event-planning',
   },
   {
     title: 'Corporate Events',
     desc: 'Conferences, launches, annual celebrations, brand events and business gatherings.',
-    img: '/cat-corporate.jpg',
+    img: '/corporate events.jpeg',
     href: '/services/corporate-event-planning',
   },
   {
@@ -132,19 +132,19 @@ export default function HomePage() {
           <div className={lShapeStyles.grid}>
             <div className={lShapeStyles.slotVert1}>
               <div className={lShapeStyles.imgWrap}>
-                <ParallaxImage src="/about-2.jpg" alt="Red draped evening reception tent with chandeliers, Bengaluru" sizes="(max-width: 1024px) 50vw, 30vw" speed={12} delay={0} from="left" />
+                <ParallaxImage src="/about-2.jpg" alt="Red draped evening reception tent with chandeliers, Bengaluru" sizes="(max-width: 1024px) 50vw, 30vw" delay={0} from="left" />
               </div>
             </div>
 
             <div className={lShapeStyles.slotVert2}>
               <div className={lShapeStyles.imgWrap}>
-                <ParallaxImage src="/about-1.jpg" alt="Red velvet wedding stage with candelabras and floral arch" sizes="(max-width: 1024px) 50vw, 30vw" speed={7} delay={0.12} from="bottom" />
+                <ParallaxImage src="/about-1.jpg" alt="Red velvet wedding stage with candelabras and floral arch" sizes="(max-width: 1024px) 50vw, 30vw" delay={0.12} from="bottom" />
               </div>
             </div>
 
             <div className={lShapeStyles.slotVert3}>
               <div className={lShapeStyles.imgWrap}>
-                <ParallaxImage src="/about-3.jpg" alt="Burgundy and white floral table setting with candles" sizes="(max-width: 1024px) 50vw, 30vw" speed={14} delay={0.24} from="right" />
+                <ParallaxImage src="/about-3.jpg" alt="Burgundy and white floral table setting with candles" sizes="(max-width: 1024px) 50vw, 30vw" delay={0.24} from="right" />
               </div>
             </div>
 
@@ -175,7 +175,7 @@ export default function HomePage() {
 
             <div className={lShapeStyles.slotHoriz}>
               <div className={lShapeStyles.imgWrap}>
-                <ParallaxImage src="/about-4.jpg" alt="Lakeside pavilion with red drapes and string lights at dusk" sizes="(max-width: 1024px) 50vw, 30vw" speed={5} delay={0.36} from="top" />
+                <ParallaxImage src="/about-4.jpg" alt="Lakeside pavilion with red drapes and string lights at dusk" sizes="(max-width: 1024px) 50vw, 30vw" delay={0.36} from="top" />
               </div>
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <WorkMasonry items={WORK_ITEMS} />
+            <WorkMasonry items={WORK_ITEMS.slice(0, 9)} />
           </Reveal>
         </div>
       </section>

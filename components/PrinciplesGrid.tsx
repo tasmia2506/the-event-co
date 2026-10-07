@@ -1,6 +1,3 @@
-'use client';
-
-import { motion, useReducedMotion } from 'motion/react';
 import { Stagger, StaggerItem } from './PageMotion';
 import styles from './PrinciplesGrid.module.css';
 
@@ -24,22 +21,13 @@ const PRINCIPLES = [
 ];
 
 export default function PrinciplesGrid({ dark = false }: { dark?: boolean }) {
-  const reduce = useReducedMotion();
   return (
-    <Stagger className={`${styles.grid} ${dark ? styles.dark : ''}`} gap={0.16}>
+    <Stagger className={`${styles.grid} ${dark ? styles.dark : ''}`}>
       {PRINCIPLES.map((p, i) => (
         <StaggerItem className={styles.item} key={p.title} variant="pop">
           <span className={styles.rule} aria-hidden="true" />
           <span className={styles.numMask} aria-hidden="true">
-            <motion.span
-              className={styles.num}
-              variants={{
-                hidden: { y: reduce ? 0 : '110%' },
-                show: { y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
-              }}
-            >
-              {String(i + 1).padStart(2, '0')}
-            </motion.span>
+            <span className={styles.num}>{String(i + 1).padStart(2, '0')}</span>
           </span>
           <h3 className={styles.title}>{p.title}</h3>
           <p className={styles.desc}>{p.desc}</p>

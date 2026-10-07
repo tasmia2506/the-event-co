@@ -6,6 +6,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import SocialRail from '@/components/SocialRail';
+import BookingModal from '@/components/BookingModal';
+import CookieConsent from '@/components/CookieConsent';
 import { SITE } from '@/lib/data/site';
 
 const oswald = Oswald({
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
 
 const LD_JSON = {
   '@context': 'https://schema.org',
-  '@type': 'EventPlanningOrService',
+  '@type': ['LocalBusiness', 'ProfessionalService'],
   name: SITE.name,
   legalName: SITE.legalName,
   url: SITE.url,
@@ -62,6 +64,7 @@ const LD_JSON = {
   slogan: SITE.tagline,
   telephone: SITE.phones.nooman.number,
   email: SITE.email,
+  priceRange: '₹₹₹',
   sameAs: [SITE.instagram],
   areaServed: { '@type': 'City', name: 'Bengaluru' },
   address: {
@@ -72,6 +75,7 @@ const LD_JSON = {
     addressRegion: 'Karnataka',
     addressCountry: 'IN',
   },
+  geo: { '@type': 'GeoCoordinates', latitude: 12.9719, longitude: 77.6083 },
   contactPoint: [SITE.phones.nooman, SITE.phones.danish].map((p) => ({
     '@type': 'ContactPoint',
     contactType: 'customer service',
@@ -83,7 +87,7 @@ const LD_JSON = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${oswald.variable} ${quattrocento.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${oswald.variable} ${quattrocento.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           Skip to main content
@@ -96,6 +100,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SocialRail />
           <Footer />
         </SmoothScroll>
+
+        <BookingModal />
+        <CookieConsent />
 
         <script
           type="application/ld+json"

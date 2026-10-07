@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Service } from '@/lib/data/services';
 import { ImageCurtain, SplitText, StaggerList, TiltCard } from './PageMotion';
+import BookNowButton from './BookNowButton';
 import styles from './ServiceCard.module.css';
 
 export function ServicesGrid({ children }: { children: React.ReactNode }) {
@@ -53,9 +54,15 @@ export default function ServiceCard({ service, href, index = 0 }: { service: Ser
       desc={service.cardDesc}
       features={service.features}
       action={
-        <Link href={href} className={`btn-pill btn-burgundy btn-sm ${styles.cta}`}>
-          {service.cta} &rarr;
-        </Link>
+        service.slug === 'event-planning' ? (
+          <BookNowButton className={`btn-pill btn-burgundy btn-sm ${styles.cta}`}>
+            {service.cta} &rarr;
+          </BookNowButton>
+        ) : (
+          <Link href={href} className={`btn-pill btn-burgundy btn-sm ${styles.cta}`}>
+            {service.cta} &rarr;
+          </Link>
+        )
       }
     />
   );

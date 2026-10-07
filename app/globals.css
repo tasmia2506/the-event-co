@@ -398,13 +398,19 @@ p {
     url('/testimonials-bg.jpg') center / cover no-repeat;
 }
 
-.testimonials-band .eyebrow,
-.testimonials-band h2 {
+.testimonials-band .eyebrow {
   color: var(--text-white);
 }
 
-.testimonials-band {
-  --heading-accent: var(--text-white);
+.testimonials-band h2 {
+  background: linear-gradient(100deg, #ff4d5e 0%, var(--text-white) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.testimonials-band h2 .heading-serif {
+  color: inherit;
 }
 
 /* --- Motion ---------------------------------------------------------- */

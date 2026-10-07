@@ -12,9 +12,23 @@ export const metadata: Metadata = {
   alternates: { canonical: '/faq' },
 };
 
+const FAQ_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
 export default function FaqPage() {
   return (
     <section className="section section-surface" style={{ paddingTop: 60 }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD).replace(/</g, '\\u003c') }}
+      />
       <div className="container">
         <PageHero
           eyebrow="Help & Knowledge"

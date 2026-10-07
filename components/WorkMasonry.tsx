@@ -31,26 +31,25 @@ export default function WorkMasonry({ items }: { items: WorkItem[] }) {
         className={styles.masonry}
         onPointerMove={fine ? (e) => { mx.set(e.clientX); my.set(e.clientY); } : undefined}
       >
-        {items.map((item, i) => (
-          <motion.button
+        {items.map((item) => (
+          <button
             key={item.title}
             type="button"
             className={styles.item}
-            initial={{ opacity: 0, y: 64, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: '0px 0px -8% 0px' }}
-            transition={{ duration: 0.55, delay: (i % 3) * 0.06, ease: [0.16, 1, 0.3, 1] }}
             onPointerEnter={() => setHovering(true)}
             onPointerLeave={() => setHovering(false)}
-            onClick={() => setLightboxItem(item)}
+            onClick={() => {
+              setHovering(false);
+              setLightboxItem(item);
+            }}
             aria-label={`View ${item.title}`}
           >
-            <ParallaxImage src={item.img} alt={item.alt} sizes="(max-width: 1024px) 50vw, 33vw" speed={4 + (i % 3) * 2} delay={(i % 3) * 0.06} from={i % 2 ? 'top' : 'bottom'} />
+            <ParallaxImage src={item.img} alt={item.alt} sizes="(max-width: 1024px) 50vw, 33vw" />
             <div className={styles.overlay}>
               <span className={styles.eventType}>{item.eventType}</span>
               <h3 className={styles.title}>{item.title}</h3>
             </div>
-          </motion.button>
+          </button>
         ))}
       </div>
       {fine && (
@@ -58,7 +57,7 @@ export default function WorkMasonry({ items }: { items: WorkItem[] }) {
             aria-hidden="true"
             className={styles.cursor}
             style={{ x: sx, y: sy }}
-            animate={{ opacity: hovering ? 1 : 0, scale: hovering ? 1 : 0.4 }}
+            animate={{ opacity: hovering && !lightboxItem ? 1 : 0, scale: hovering && !lightboxItem ? 1 : 0.4 }}
             transition={{ duration: 0.3 }}
           >
             VIEW

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { FormReveal, MotionIn, SplitText, Stagger, StaggerItem } from '@/components/PageMotion';
+import { FormReveal, MotionIn, Stagger, StaggerItem } from '@/components/PageMotion';
 import EnquiryForm from '@/components/EnquiryForm';
 import { SITE } from '@/lib/data/site';
 import splitStyles from '@/components/SplitForm.module.css';
@@ -65,13 +65,11 @@ export default function ContactPage() {
               <MotionIn y={16} trigger="mount" delay={0.2}>
                 <div className={splitStyles.panelKicker}>Contact</div>
               </MotionIn>
-              <SplitText
-                as="h1"
-                trigger="mount"
-                delay={0.2}
-                className={splitStyles.panelTitle}
-                text={"LET'S TALK" + String.fromCharCode(10) + 'ABOUT YOUR EVENT.'}
-              />
+              <h1 className={splitStyles.panelTitle}>
+                LET&rsquo;S TALK
+                <br />
+                ABOUT YOUR EVENT.
+              </h1>
               <MotionIn y={24} trigger="mount" delay={0.7}>
                 <p className={splitStyles.panelText}>
                   Tell us about your event, date, location and requirements. Our team will get in touch to discuss the

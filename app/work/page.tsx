@@ -1,11 +1,11 @@
 import { whatsappUrl } from '@/lib/whatsapp';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import PageHero from '@/components/PageHero';
-import WorkGrid from '@/components/WorkGrid';
+import PageBanner from '@/components/PageBanner';
+import WorkMasonry from '@/components/WorkMasonry';
 import CountUp from '@/components/CountUp';
-import { Orbs, SplitText, Stagger, StaggerItem, MotionIn } from '@/components/PageMotion';
-import { WORK_ITEMS, WORK_FILTERS } from '@/lib/data/work';
+import { Orbs, Stagger, StaggerItem, MotionIn } from '@/components/PageMotion';
+import { WORK_ITEMS } from '@/lib/data/work';
 import ctaStyles from '@/components/CTABand.module.css';
 import styles from './page.module.css';
 
@@ -24,21 +24,16 @@ const STATS = [
 ];
 
 export default function WorkPage() {
-  const items = WORK_ITEMS.map((w) => ({
-    ...w,
-    meta: [w.year, w.scale].filter(Boolean).join(' • '),
-  }));
-
   return (
     <>
-    <section className="section section-surface" style={{ paddingTop: 60 }}>
-      <div className="container">
-        <PageHero
-          eyebrow="Proof Of Work"
-          title="Our Work Across Bengaluru"
-          lead="Over a decade of weddings, corporate summits, private celebrations, and heavy technical productions — delivered end to end."
-        />
+    <PageBanner
+      eyebrow="Proof Of Work"
+      title="Our Work Across Bengaluru"
+      lead="Over a decade of weddings, corporate summits, private celebrations, and heavy technical productions — delivered end to end."
+    />
 
+    <section className="section section-surface">
+      <div className="container">
         <Stagger className={styles.stats} gap={0.12}>
           {STATS.map((s) => (
             <StaggerItem variant="pop" className={styles.statItem} key={s.label}>
@@ -50,14 +45,18 @@ export default function WorkPage() {
           ))}
         </Stagger>
 
-        <WorkGrid items={items} filters={WORK_FILTERS} />
+        <WorkMasonry items={WORK_ITEMS} />
       </div>
     </section>
 
     <section className={`${ctaStyles.band} ${styles.bandFx}`}>
       <Orbs />
       <div className={`container ${styles.bandInner}`}>
-        <SplitText as="h2" text={'WANT YOUR PRODUCTION' + String.fromCharCode(10) + 'FEATURED HERE?'} />
+        <h2>
+          WANT YOUR PRODUCTION
+          <br />
+          FEATURED HERE?
+        </h2>
         <MotionIn y={26} delay={0.35}>
           <p>
             Tell us about the event you&rsquo;re planning and let&rsquo;s build the next case study together.

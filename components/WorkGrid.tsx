@@ -128,11 +128,8 @@ export default function WorkGrid({ items, filters }: WorkGridProps) {
               layout="position"
               key={item.title}
               className={styles.cell}
-              initial={{ opacity: 0, scale: reduce ? 1 : 0.84, y: reduce ? 0 : 50 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
               exit={{ opacity: 0, scale: reduce ? 1 : 0.88 }}
-              transition={{ duration: reduce ? 0.2 : 0.85, delay: reduce ? 0 : (i % 3) * 0.1, ease: EASE }}
+              transition={{ duration: reduce ? 0.2 : 0.4, ease: EASE }}
             >
               <button
                 type="button"

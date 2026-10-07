@@ -93,15 +93,12 @@
 
 /* ---------- WordScroll (pinned, word-by-word highlight) ---------- */
 .wordScroll {
-  max-width: 980px;
-  margin: 0 auto;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(1.6rem, 1.05rem + 2.3vw, 3.1rem);
-  line-height: 1.22;
-  letter-spacing: -0.01em;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
   text-transform: none;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   text-wrap: balance;
 }
 
@@ -111,8 +108,7 @@
 }
 
 .wordScrollWrap {
-  max-width: 980px;
-  margin: 0 auto;
+  min-width: 0;
 }
 
 .wordProgress {
