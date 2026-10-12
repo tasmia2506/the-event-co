@@ -4,7 +4,6 @@ import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
 import SocialRail from '@/components/SocialRail';
 import BookingModal from '@/components/BookingModal';
 import CookieConsent from '@/components/CookieConsent';
@@ -96,7 +95,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll>
           <Header />
           <main id="main" tabIndex={-1}>{children}</main>
-          <WhatsAppFloat />
           <SocialRail />
           <Footer />
         </SmoothScroll>

@@ -1,0 +1,30 @@
+/* Visible by default — [data-pending] is only ever added once JS has
+   confirmed the element is off-screen at mount, so a reveal that never
+   fires simply means nothing was ever hidden (safe for SSR/no-JS/crawlers). */
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+}
+
+.reveal[data-pending='true'] {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 24px));
+}
+
+.reveal.mask[data-pending='true'] {
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-y, 24px) * 1.4)) scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-pending='true'],
+  .reveal.mask[data-pending='true'] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

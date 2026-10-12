@@ -1,5 +1,101 @@
 /* Shared motion primitives for the inner pages (see PageMotion.tsx). */
 
+/* ---------- MotionIn ----------
+   .motionMount plays once, on load, via a pure CSS @keyframes animation
+   — this needs no JS at all, so it can never leave content hidden.
+   .motionView is visible by default; [data-pending] is only ever added by
+   JS once it has confirmed the element is off-screen at mount, so a
+   reveal that never fires simply means nothing was ever hidden. */
+.motionMount {
+  animation: motionIn var(--mi-duration, 0.6s) cubic-bezier(0.16, 1, 0.3, 1) var(--mi-delay, 0s) both;
+}
+
+.motionView {
+  transition:
+    opacity var(--mi-duration, 0.6s) cubic-bezier(0.16, 1, 0.3, 1) var(--mi-delay, 0s),
+    transform var(--mi-duration, 0.6s) cubic-bezier(0.16, 1, 0.3, 1) var(--mi-delay, 0s);
+}
+
+.motionView[data-pending='true'] {
+  opacity: 0;
+  transform: translate(var(--mi-x, 0), var(--mi-y, 24px));
+}
+
+@keyframes motionIn {
+  from {
+    opacity: 0;
+    transform: translate(var(--mi-x, 0), var(--mi-y, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Stagger / StaggerItem ---------- */
+.staggerItem {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--stagger-base-delay, 0s) + var(--i, 0) * var(--stagger-gap, 0.08s));
+}
+
+.stagger[data-pending='true'] .staggerItem {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.stagger[data-pending='true'] .staggerItem[data-variant='pop'] {
+  transform: scale(0.9);
+}
+
+.staggerMount .staggerItem {
+  animation: staggerIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--stagger-base-delay, 0s) + var(--i, 0) * var(--stagger-gap, 0.08s));
+}
+
+.staggerMount .staggerItem[data-variant='pop'] {
+  animation-name: staggerInPop;
+}
+
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes staggerInPop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motionMount,
+  .motionView,
+  .motionView[data-pending='true'],
+  .staggerItem,
+  .stagger[data-pending='true'] .staggerItem,
+  .staggerMount .staggerItem {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* ---------- SplitText ---------- */
 .word {
   display: inline-block;

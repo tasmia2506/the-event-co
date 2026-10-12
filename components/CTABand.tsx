@@ -1,5 +1,4 @@
-import { whatsappUrl } from '@/lib/whatsapp';
-import MagneticLink from './MagneticLink';
+import BookNowButton from './BookNowButton';
 import Reveal from './Reveal';
 import styles from './CTABand.module.css';
 
@@ -21,9 +20,9 @@ export default function CTABand() {
         </Reveal>
         <Reveal delay={0.3}>
           <div className={styles.actions}>
-            <MagneticLink href={whatsappUrl()} target="_blank" rel="noopener" className="btn-pill btn-light btn-lg">
+            <BookNowButton className="btn-pill btn-light btn-lg">
               PLAN YOUR EVENT &rarr;
-            </MagneticLink>
+            </BookNowButton>
           </div>
         </Reveal>
       </div>

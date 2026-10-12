@@ -71,10 +71,7 @@
 }
 
 .hero .title {
-  background: linear-gradient(100deg, #ff4d5e 0%, var(--text-white) 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--text-white);
 }
 
 .description {
@@ -93,6 +90,11 @@
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 48px;
+}
+
+/* Keep both CTAs the same width regardless of label length */
+.actions :global(.btn-pill) {
+  min-width: 220px;
 }
 
 .stats {

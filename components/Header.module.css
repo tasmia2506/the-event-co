@@ -131,6 +131,10 @@
   gap: 14px;
 }
 
+.navMobileActions {
+  display: none;
+}
+
 .menuToggle {
   display: none;
   flex-direction: column;
@@ -196,6 +200,26 @@
     padding: 14px 18px;
     min-height: 48px;
     border-bottom: none;
+  }
+
+  .navMobileActions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 12px;
+    padding: 20px 18px 0;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .navMobileActions .headerPhone {
+    justify-content: center;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  .navMobileActions :global(.btn-pill) {
+    width: 100%;
   }
 
   .menuToggle {

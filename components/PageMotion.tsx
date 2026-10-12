@@ -1,12 +1,20 @@
 'use client';
 
 import {
+  Children,
   Fragment,
+  cloneElement,
+  isValidElement,
+  useEffect,
+  useRef,
   useSyncExternalStore,
+  type CSSProperties,
+  type ElementType,
   type PointerEvent as ReactPointerEvent,
+  type ReactElement,
   type ReactNode,
 } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import styles from './PageMotion.module.css';
 
 type Trigger = 'mount' | 'view';
@@ -27,6 +35,68 @@ export function usePointerFine() {
     () => window.matchMedia(FINE).matches,
     () => false,
   );
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared scroll-reveal: content is ALWAYS visible by default (safe for */
+/* SSR, no-JS and crawlers). JS only ever ADDS a transient "pending"     */
+/* state, and only for elements it has confirmed are off-screen at      */
+/* mount — so a reveal that never fires simply means nothing was ever   */
+/* hidden. One IntersectionObserver instance is shared by every caller. */
+/* ------------------------------------------------------------------ */
+let sharedIO: IntersectionObserver | null = null;
+const revealCallbacks = new WeakMap<Element, () => void>();
+
+function getSharedIO() {
+  if (sharedIO || typeof IntersectionObserver === 'undefined') return sharedIO;
+  sharedIO = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const reveal = revealCallbacks.get(entry.target);
+        if (reveal) {
+          reveal();
+          revealCallbacks.delete(entry.target);
+          sharedIO!.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -10% 0px' },
+  );
+  return sharedIO;
+}
+
+export function useScrollReveal<T extends HTMLElement>(active = true) {
+  const ref = useRef<T>(null);
+
+  // Imperative DOM mutation, not React state: the [data-pending] attribute is
+  // purely presentational (read by CSS), so there's no need to re-render the
+  // component just to flip it, and it sidesteps setState-in-effect entirely.
+  useEffect(() => {
+    const el = ref.current;
+    if (!active || !el || typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+    if (alreadyVisible) return;
+
+    const io = getSharedIO();
+    if (!io) return;
+
+    el.dataset.pending = 'true';
+    revealCallbacks.set(el, () => {
+      delete el.dataset.pending;
+    });
+    io.observe(el);
+    return () => {
+      revealCallbacks.delete(el);
+      io.unobserve(el);
+      delete el.dataset.pending;
+    };
+  }, [active]);
+
+  return { ref };
 }
 
 /* ------------------------------------------------------------------ */
@@ -72,7 +142,10 @@ export function SplitText({ text, as = 'h2', className, accentFrom, accentClassN
 }
 
 /* ------------------------------------------------------------------ */
-/* MotionIn: renders children directly, no slide / scale / wipe         */
+/* MotionIn: a clean fade + rise reveal. "mount" plays immediately via  */
+/* a pure CSS @keyframes animation (works even with JS disabled).      */
+/* "view" (the default) only animates once scrolled into view, using    */
+/* the visible-by-default useScrollReveal hook above.                   */
 /* ------------------------------------------------------------------ */
 interface MotionInProps {
   children?: ReactNode;
@@ -87,42 +160,100 @@ interface MotionInProps {
   as?: Tag;
 }
 
-export function MotionIn({ children, className, as = 'div' }: MotionInProps) {
-  const Tag = as;
-  return <Tag className={className}>{children}</Tag>;
+export function MotionIn({
+  children,
+  className,
+  x = 0,
+  y = 24,
+  delay = 0,
+  duration = 0.6,
+  trigger = 'view',
+  as = 'div',
+}: MotionInProps) {
+  const Tag = as as ElementType;
+  const { ref } = useScrollReveal<HTMLElement>(trigger === 'view');
+  const vars = {
+    '--mi-x': `${x}px`,
+    '--mi-y': `${y}px`,
+    '--mi-delay': `${delay}s`,
+    '--mi-duration': `${duration}s`,
+  } as CSSProperties;
+
+  if (trigger === 'mount') {
+    return (
+      <Tag className={`${styles.motionMount} ${className ?? ''}`} style={vars}>
+        {children}
+      </Tag>
+    );
+  }
+
+  return (
+    <Tag ref={ref} className={`${styles.motionView} ${className ?? ''}`} style={vars}>
+      {children}
+    </Tag>
+  );
 }
 
 /* ------------------------------------------------------------------ */
 /* Stagger / StaggerItem / StaggerList                                  */
+/* Children are cloned with an --i custom property so each item can     */
+/* delay itself by index via CSS — no per-count rule list to maintain.  */
 /* ------------------------------------------------------------------ */
-export function Stagger({
-  children,
-  className,
-  as = 'div',
-}: {
+interface StaggerProps {
   children: ReactNode;
   className?: string;
   as?: Tag;
   gap?: number;
   delay?: number;
   trigger?: Trigger;
-}) {
-  const Tag = as;
-  return <Tag className={className}>{children}</Tag>;
+}
+
+export function Stagger({ children, className, as = 'div', gap = 0.08, delay = 0, trigger = 'view' }: StaggerProps) {
+  const Tag = as as ElementType;
+  const { ref } = useScrollReveal<HTMLElement>(trigger === 'view');
+  const vars = { '--stagger-gap': `${gap}s`, '--stagger-base-delay': `${delay}s` } as CSSProperties;
+  const indexed = Children.map(children, (child, i) =>
+    isValidElement(child)
+      ? cloneElement(child as ReactElement<{ style?: CSSProperties }>, {
+          style: { ...(child.props as { style?: CSSProperties }).style, '--i': i } as CSSProperties,
+        })
+      : child,
+  );
+
+  if (trigger === 'mount') {
+    return (
+      <Tag className={`${styles.stagger} ${styles.staggerMount} ${className ?? ''}`} style={vars}>
+        {indexed}
+      </Tag>
+    );
+  }
+
+  return (
+    <Tag ref={ref} className={`${styles.stagger} ${className ?? ''}`} style={vars}>
+      {indexed}
+    </Tag>
+  );
 }
 
 export function StaggerItem({
   children,
   className,
   as = 'div',
+  variant = 'rise',
+  style,
 }: {
   children: ReactNode;
   className?: string;
   as?: Tag;
   variant?: 'rise' | 'line' | 'pop';
+  style?: CSSProperties;
 }) {
-  const Tag = as;
-  return <Tag className={className}>{children}</Tag>;
+  const Tag = as as ElementType;
+  return (
+    <Tag className={`${styles.staggerItem} ${className ?? ''}`} data-variant={variant} style={style}>
+      {children}
+    </Tag>
+  );
 }
 
 export function StaggerList({ items, className }: { items: string[]; className?: string }) {
@@ -151,11 +282,13 @@ export function ImageCurtain({
 }
 
 /* ------------------------------------------------------------------ */
-/* Float: static wrapper, no scroll-linked drift                        */
+/* Float: a gentle scroll-linked drift. Only ever offsets position —    */
+/* never opacity — so it can't leave content hidden if JS never runs.   */
 /* ------------------------------------------------------------------ */
 export function Float({
   children,
   className,
+  to = 40,
 }: {
   children: ReactNode;
   className?: string;
@@ -163,7 +296,20 @@ export function Float({
   distance?: number;
   intro?: boolean;
 }) {
-  return <div className={className}>{children}</div>;
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const rawY = useTransform(scrollYProgress, [0, 1], [-to / 2, to / 2]);
+  const y = useSpring(rawY, { stiffness: 100, damping: 30, mass: 0.4 });
+
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
+  return (
+    <motion.div ref={ref} className={className} style={{ y }}>
+      {children}
+    </motion.div>
+  );
 }
 
 /* ------------------------------------------------------------------ */

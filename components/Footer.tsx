@@ -11,7 +11,7 @@ export default function Footer() {
         <div className={styles.grid}>
           <div>
             <div className={styles.brandTitle}>
-              THE EVENT <span>CO.</span>
+              THE EVENT <span>CO</span>
             </div>
             <div className={styles.tagline}>{SITE.tagline}</div>
             <p className={styles.desc}>Event Management &amp; Planning</p>

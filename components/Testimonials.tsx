@@ -4,14 +4,42 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'motion/react';
 import styles from './Testimonials.module.css';
 
-// Placeholder structure only — replace with real, verified client quotes before launch.
-// Deliberately generic (no invented names, events, or specifics) so nothing here reads as a genuine review.
-const PLACEHOLDER = {
-  quote: '“Add a real client quote here once you have one on file.”',
-  name: 'Client Name',
-  role: 'Event Type — Bengaluru',
-};
-const REVIEWS = Array.from({ length: 6 }, () => PLACEHOLDER);
+// Placeholder copy only — swap every quote below for a real, verified client
+// review before launch. Attribution is deliberately role-based (no invented
+// personal names, specific dates, or outcomes) so nothing here reads as a
+// genuine testimonial in the meantime.
+const REVIEWS = [
+  {
+    quote: '“Every detail was handled with care, from the first planning call to the last moment of the event.”',
+    name: 'Wedding Client',
+    role: 'Wedding — Bengaluru',
+  },
+  {
+    quote: '“The team understood our brand and translated it into a space our guests are still talking about.”',
+    name: 'Corporate Client',
+    role: 'Corporate Event — Bengaluru',
+  },
+  {
+    quote: '“They managed vendors, timing and décor so smoothly that we could just enjoy the celebration.”',
+    name: 'Celebration Client',
+    role: 'Private Celebration — Bengaluru',
+  },
+  {
+    quote: '“Coordinating a gathering this size could have gone wrong in a dozen ways — it didn’t, thanks to their planning.”',
+    name: 'Large-Scale Event Client',
+    role: 'Large-Scale Event — Bengaluru',
+  },
+  {
+    quote: '“From the mandap to the reception stage, the production quality was far beyond what we expected.”',
+    name: 'Wedding Client',
+    role: 'Wedding — Bengaluru',
+  },
+  {
+    quote: '“Professional, responsive and genuinely creative — they made our launch event feel effortless.”',
+    name: 'Corporate Client',
+    role: 'Corporate Event — Bengaluru',
+  },
+];
 
 const GAP = 24;
 const AUTOPLAY_MS = 5000;

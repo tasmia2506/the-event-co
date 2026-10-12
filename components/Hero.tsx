@@ -31,14 +31,13 @@ export default function Hero() {
         <video
           ref={videoRef}
           className={`${styles.video} ${m.kenBurns}`}
-          poster="/hero-bg.jpg"
           autoPlay
           muted
           loop
           playsInline
           preload="metadata"
         >
-          <source src="/landing page vedio.mp4" type="video/mp4" />
+          <source src="/decore.mp4" type="video/mp4" />
         </video>
       </div>
       <div className={styles.videoShade} aria-hidden="true" />
@@ -48,11 +47,13 @@ export default function Hero() {
       <div className="container">
         <div className={styles.grid}>
           <div>
-            <div className={`eyebrow ${m.eyebrow}`}>THE EVENT CO.</div>
+            <div className={`eyebrow ${m.eyebrow}`}>THE EVENT CO</div>
             <h1 className={styles.title} aria-label="Where every detail becomes a memory.">
-              WHERE EVERY DETAIL
+              WHERE EVERY
               <br />
-              BECOMES A MEMORY.
+              DETAIL BECOMES
+              <br />
+              A MEMORY.
             </h1>
             <p className={styles.description}>
               From bespoke weddings and private celebrations to corporate experiences and large-scale events &mdash;
@@ -68,13 +69,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className={m.cue} aria-hidden="true">
-        <span className={m.cueText}>SCROLL</span>
-        <span className={m.cueTrack}>
-          <span className={m.cueDot} />
-        </span>
       </div>
     </section>
   );

@@ -56,7 +56,7 @@
 }
 
 @media (max-width: 640px) {
-  /* Bottom-left, horizontal: keeps clear of content and of the WhatsApp button */
+  /* Bottom-left, horizontal: keeps clear of other content */
   .rail {
     top: auto;
     bottom: max(16px, env(safe-area-inset-bottom));
