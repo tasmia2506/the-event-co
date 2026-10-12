@@ -1,8 +1,8 @@
-import { whatsappUrl } from '@/lib/whatsapp';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import BookNowButton from '@/components/BookNowButton';
 import { SplitText, ImageCurtain, MotionIn, StaggerList } from '@/components/PageMotion';
 import ServiceCard, { ServicesGrid } from '@/components/ServiceCard';
 import { SERVICES, getServiceBySlug } from '@/lib/data/services';
@@ -58,9 +58,9 @@ export default async function ServiceSubPage({ params }: { params: Promise<{ slu
             <StaggerList className={styles.features} items={service.fullFeatures} />
             <MotionIn y={20} delay={0.1}>
               <div style={{ marginTop: 28 }}>
-                <a href={whatsappUrl(`Hi THE EVENT CO.! I am interested in ${service.title}.`)} target="_blank" rel="noopener" className="btn-pill btn-burgundy btn-sm">
+                <BookNowButton className="btn-pill btn-burgundy btn-sm">
                   {service.cta} &rarr;
-                </a>
+                </BookNowButton>
               </div>
             </MotionIn>
           </div>

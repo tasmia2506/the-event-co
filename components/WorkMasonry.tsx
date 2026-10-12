@@ -74,7 +74,8 @@ export default function WorkMasonry({ items }: { items: WorkItem[] }) {
               <Image src={lightboxItem.img} alt={lightboxItem.alt} fill sizes="90vw" />
             </div>
             <div className={styles.lightboxCaption}>
-              <strong>{lightboxItem.title}</strong> &mdash; {lightboxItem.desc}
+              <strong className={styles.lightboxCaptionTitle}>{lightboxItem.title}</strong>
+              <p className={styles.lightboxCaptionDesc}>{lightboxItem.desc}</p>
             </div>
           </div>
         </div>
