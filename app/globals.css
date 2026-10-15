@@ -386,10 +386,20 @@ p {
   margin-bottom: 20px;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 868px) and (min-width: 481px) {
   .form-grid-2 {
     grid-template-columns: 1fr;
     gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-grid-2 {
+    gap: 10px;
+  }
+
+  .form-field {
+    margin-bottom: 14px;
   }
 }
 
