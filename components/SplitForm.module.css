@@ -235,7 +235,8 @@
   }
 
   .panelForm {
-    padding: 12px 20px 36px;
+    /* Clear the fixed bottom-left social rail (~46px + gap) so the submit button isn't covered */
+    padding: 12px 20px calc(36px + 46px + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -249,7 +250,7 @@
   }
 
   .panelForm {
-    padding: 8px 12px 28px;
+    padding: 8px 12px calc(28px + 46px + env(safe-area-inset-bottom, 0px));
   }
 
   .panelKicker {
