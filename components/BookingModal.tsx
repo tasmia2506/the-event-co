@@ -32,7 +32,7 @@ export default function BookingModal() {
         &times;
       </button>
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
-        <EnquiryForm idPrefix="book" />
+        <EnquiryForm idPrefix="book" compact />
       </div>
     </div>,
     document.body,

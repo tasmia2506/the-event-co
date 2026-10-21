@@ -14,7 +14,7 @@ const SERVICES_REQUIRED = [
   'Other',
 ];
 
-export default function EnquiryForm({ idPrefix = 'enquiry' }: { idPrefix?: string }) {
+export default function EnquiryForm({ idPrefix = 'enquiry', compact = false }: { idPrefix?: string; compact?: boolean }) {
   const [submitted, setSubmitted] = useState(false);
   const [waLink, setWaLink] = useState('');
   const [name, setName] = useState('');
@@ -48,7 +48,7 @@ export default function EnquiryForm({ idPrefix = 'enquiry' }: { idPrefix?: strin
   };
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${compact ? styles.cardCompact : ''}`}>
       <h3 className={styles.cardTitle}>Event Enquiry</h3>
       <p className={styles.cardSub}>
         Tell us about your event, date, location and requirements. Our team will get in touch to discuss the
@@ -67,7 +67,8 @@ export default function EnquiryForm({ idPrefix = 'enquiry' }: { idPrefix?: strin
         </div>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={compact ? styles.formCompact : undefined}>
+        <div className={compact ? styles.scrollArea : undefined}>
         <div className="form-grid-2">
           <div className="form-field">
             <label htmlFor={`${idPrefix}Name`}>Name *</label>
@@ -133,6 +134,7 @@ export default function EnquiryForm({ idPrefix = 'enquiry' }: { idPrefix?: strin
         <div className="form-field">
           <label htmlFor={`${idPrefix}Message`}>Tell us about your event</label>
           <textarea id={`${idPrefix}Message`} name="message" rows={4} placeholder="Share your dream aesthetic, specific requirements, themes, or any details..." />
+        </div>
         </div>
 
         <button type="submit" className={`btn-pill btn-burgundy btn-lg ${styles.submitBtn}`}>
