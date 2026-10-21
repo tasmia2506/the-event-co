@@ -67,7 +67,7 @@ export default function RentalForm() {
         <div className="form-grid-2">
           <div className="form-field">
             <label htmlFor="rentPhone">WhatsApp / Mobile Phone *</label>
-            <input id="rentPhone" name="phone" type="tel" placeholder="+91" required pattern="(\+91[ -]?)?[6-9][0-9]{4}[ -]?[0-9]{5}" title="Enter a 10-digit Indian mobile number, e.g. 98765 43210" />
+            <input id="rentPhone" name="phone" type="tel" placeholder="+91" required pattern="(\+91[ \-]?)?[6-9][0-9]{4}[ \-]?[0-9]{5}" title="Enter a 10-digit Indian mobile number, e.g. 98765 43210" />
           </div>
           <div className="form-field">
             <label htmlFor="rentEmail">Email Address *</label>

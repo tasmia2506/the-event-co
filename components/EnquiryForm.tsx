@@ -75,7 +75,7 @@ export default function EnquiryForm({ idPrefix = 'enquiry' }: { idPrefix?: strin
           </div>
           <div className="form-field">
             <label htmlFor={`${idPrefix}Phone`}>Phone Number *</label>
-            <input type="tel" id={`${idPrefix}Phone`} name="phone" required pattern="(\+91[ -]?)?[6-9][0-9]{4}[ -]?[0-9]{5}" title="Enter a 10-digit Indian mobile number, e.g. 98765 43210" placeholder="e.g. 98765 43210" />
+            <input type="tel" id={`${idPrefix}Phone`} name="phone" required pattern="(\+91[ \-]?)?[6-9][0-9]{4}[ \-]?[0-9]{5}" title="Enter a 10-digit Indian mobile number, e.g. 98765 43210" placeholder="e.g. 98765 43210" />
           </div>
         </div>
 
