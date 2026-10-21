@@ -19,24 +19,36 @@
 
 .close {
   position: absolute;
-  top: -44px;
-  right: 0;
-  background: transparent;
-  border: none;
-  color: var(--text-white);
-  font-size: 2rem;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-card-tint);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
-  padding: 8px;
+  padding: 0;
+  transition: background var(--transition-fast, 0.15s ease);
+}
+
+.close:hover {
+  background: var(--border-subtle);
 }
 
 @media (max-width: 640px) {
   .overlay {
-    padding: 72px 12px 16px;
+    padding: 16px 12px;
   }
 
   .close {
-    top: -52px;
-    right: 4px;
+    top: 10px;
+    right: 10px;
   }
 }
