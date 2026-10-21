@@ -2,19 +2,19 @@
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 40px;
+  padding: 28px;
   box-shadow: var(--shadow-card);
 }
 
 .cardTitle {
-  font-size: 1.6rem;
-  margin-bottom: 8px;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
 }
 
 .cardSub {
   color: var(--text-secondary);
-  margin-bottom: 24px;
-  font-size: 0.9375rem;
+  margin-bottom: 18px;
+  font-size: 0.875rem;
 }
 
 .submitBtn {
@@ -91,16 +91,16 @@
 
 @media (max-width: 868px) {
   .card {
-    padding: 32px 22px;
+    padding: 24px 20px;
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    padding: 26px 16px;
+    padding: 20px 16px;
   }
 
   .cardTitle {
-    font-size: 1.35rem;
+    font-size: 1.15rem;
   }
 }
