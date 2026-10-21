@@ -18,28 +18,29 @@
 }
 
 .close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 10;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2001;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--bg-card-tint);
-  border: 1px solid var(--border-subtle);
+  background: var(--text-white);
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1;
   cursor: pointer;
   padding: 0;
-  transition: background var(--transition-fast, 0.15s ease);
+  transition: transform var(--transition-fast, 0.15s ease);
 }
 
 .close:hover {
-  background: var(--border-subtle);
+  transform: scale(1.08);
 }
 
 @media (max-width: 640px) {
@@ -48,7 +49,7 @@
   }
 
   .close {
-    top: 10px;
-    right: 10px;
+    top: 12px;
+    right: 12px;
   }
 }

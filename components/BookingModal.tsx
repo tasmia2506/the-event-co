@@ -28,10 +28,10 @@ export default function BookingModal() {
 
   return createPortal(
     <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Book your event" onClick={() => setOpen(false)}>
+      <button type="button" className={styles.close} onClick={() => setOpen(false)} aria-label="Close booking form">
+        &times;
+      </button>
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
-        <button type="button" className={styles.close} onClick={() => setOpen(false)} aria-label="Close booking form">
-          &times;
-        </button>
         <EnquiryForm idPrefix="book" />
       </div>
     </div>,
